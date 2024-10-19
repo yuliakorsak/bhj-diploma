@@ -192,12 +192,11 @@ class TransactionsPage {
    * */
   renderTransactions(data) {
     const list = this.element.querySelector('.content');
-    list.innerHTML = '';
     if (data) {
-      data.forEach(item => {
-        const html = this.getTransactionHTML(item);
-        list.insertAdjacentHTML('beforeend', html);
-      });
+      const innerHtml = data.reduce((transactions, item) => {
+        return transactions + this.getTransactionHTML(item);
+      }, '');
+      list.innerHTML = innerHtml;
     }
   }
 }
